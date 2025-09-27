@@ -29,15 +29,6 @@ docker load -i supanel.tar
 docker run --privileged -d -p 20:20 -p 21:21 -p 22:22 -p 25:25 -p 53:53 -p 53:53/udp -p 80:80 -p 443:443 -p 3306:3306 -p 5432:5432 -p 6379:6379 -p 27017:27017 -p 9200:9200 -p 9300:9300 -p 15672:15672 -p 5672:5672 -p 888:888 -p 2025:2025 -p 7800:7800 -p 8080:8080 -p 8443:8443 -p 9001:9001 -p 8888:8888 -p 3000:3000 -p 8000:8000 -p 39000-39009:39000-39009 --name=supanel_server supanel:latest
 ```
 
-## 🌐 Access Your Server
-
-Once running, access your Supanel admin panel at:
-- **Admin Panel**: https://localhost:2025/supanel
-
-### Default Credentials
-- **Username**: `skilledu`
-- **Password**: `skilledu`
-
 ## 🚀 Start aaPanel Service
 
 After the container is running, you need to start the aaPanel service inside the container:
@@ -49,6 +40,15 @@ docker exec -it supanel_server bash
 # Start aaPanel service
 sudo bt 3
 ```
+
+## 🌐 Access Your Server
+
+Once running, access your Supanel admin panel at:
+- **Admin Panel**: https://localhost:2025/supanel
+
+### Default Credentials
+- **Username**: `skilledu`
+- **Password**: `skilledu`
 
 
 **Note**: This container includes [aaPanel](https://www.aapanel.com/) - a free and open-source hosting control panel that has been installed on more than 3,000,000+ servers since 2017.
