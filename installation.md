@@ -222,7 +222,7 @@ You should see the `supanel_server` container in the running state.
 The Supanel server will be accessible on various ports as configured in the Docker run command.
 
 ### Web Interface Access
-- **Admin Panel**: https://localhost:2025/supanel
+- **Admin Panel**: http://localhost:2025/supanel
 
 ### Default Credentials
 - **Username**: `skilledu`
