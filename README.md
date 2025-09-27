@@ -44,7 +44,7 @@ sudo bt 3
 ## 🌐 Access Your Server
 
 Once running, access your Supanel admin panel at:
-- **Admin Panel**: https://localhost:2025/supanel
+- **Admin Panel**: http://localhost:2025/supanel
 
 ### Default Credentials
 - **Username**: `skilledu`
