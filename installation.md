@@ -1,92 +1,109 @@
-# 🚀 Supanel Installation Guide
+<!-- 
+  Title: Supanel Installation Guide: How to Install on Windows, Ubuntu, CentOS & macOS
+  Description: Complete step-by-step Supanel installation guide. Learn how to install Docker and deploy the Supanel hosting control panel on Linux (Ubuntu/CentOS), macOS, and Windows.
+  Keywords: Supanel installation guide, install Supanel on Ubuntu, CentOS Docker setup, Windows Docker Desktop, aaPanel Docker installation, free web hosting panel setup, Supanel tutorial, Docker container management
+-->
 
-Choose the installation method that works best for you.
+<div align="center">
+  <h1>🚀 Supanel Installation Guide</h1>
+  <p><strong>Complete Setup Instructions for Windows, macOS, and Linux</strong></p>
+  <p>Welcome to the official <strong>Supanel installation guide</strong>. Whether you are setting up a local development environment or deploying a production VPS, this guide covers everything you need to install and configure the Supanel server management platform.</p>
+</div>
 
-## Prerequisites
+---
 
-- Docker installed on your system
-- Internet connection (for Method 1)
+## 📋 Prerequisites for Installation
 
-## Docker Installation
+Before installing the **Supanel hosting control panel**, ensure you meet the following requirements:
+- **Docker** must be installed and running on your host system.
+- An active internet connection (required for Method 1).
+- Root or Administrator privileges on your machine.
 
-If you don't have Docker installed, follow these steps:
+---
 
-### For Ubuntu/Debian:
+## 🐳 Step 1: Install Docker (If Not Already Installed)
+
+Since Supanel is a highly secure, **Docker-based deployment**, you must have Docker running. Choose your operating system below for detailed Docker installation steps:
+
+### 🐧 For Ubuntu / Debian
 ```bash
-# Update package index
+# Update local package index
 sudo apt update
 
-# Install required packages
+# Install prerequisite packages securely
 sudo apt install apt-transport-https ca-certificates curl gnupg lsb-release
 
-# Add Docker's official GPG key
+# Add Docker's official secure GPG key
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
 
-# Add Docker repository
+# Add the official Docker repository
 echo "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 
-# Update package index again
+# Update package index and install Docker Engine
 sudo apt update
-
-# Install Docker
 sudo apt install docker-ce docker-ce-cli containerd.io
 
-# Start and enable Docker service
+# Start and permanently enable the Docker service
 sudo systemctl start docker
 sudo systemctl enable docker
 
-# Add your user to docker group (optional, to run docker without sudo)
+# (Optional) Add your user to the docker group to run without sudo
 sudo usermod -aG docker $USER
 ```
 
-### For CentOS/RHEL:
+### 🔴 For CentOS / RHEL / AlmaLinux
 ```bash
-# Install required packages
+# Install the necessary yum utilities
 sudo yum install -y yum-utils
 
-# Add Docker repository
+# Add the official Docker repository
 sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
 
-# Install Docker
+# Install the latest Docker Engine
 sudo yum install docker-ce docker-ce-cli containerd.io
 
-# Start and enable Docker service
+# Start and permanently enable the Docker service
 sudo systemctl start docker
 sudo systemctl enable docker
 
-# Add your user to docker group (optional, to run docker without sudo)
+# (Optional) Add your user to the docker group
 sudo usermod -aG docker $USER
 ```
 
-### For macOS:
-1. Download Docker Desktop from: https://www.docker.com/products/docker-desktop
-2. Install the downloaded .dmg file
-3. Launch Docker Desktop from Applications
+### 🍏 For macOS Users
+1. Download **Docker Desktop for Mac** from the official site: [https://www.docker.com/products/docker-desktop](https://www.docker.com/products/docker-desktop)
+2. Open the downloaded `.dmg` file and drag Docker to your Applications folder.
+3. Launch Docker Desktop from Launchpad and grant the necessary permissions.
 
-### For Windows:
-1. Download Docker Desktop from: https://www.docker.com/products/docker-desktop
-2. Install the downloaded .exe file
-3. Restart your computer if prompted
-4. Launch Docker Desktop
+### 🪟 For Windows Users
+1. Download **Docker Desktop for Windows** from: [https://www.docker.com/products/docker-desktop](https://www.docker.com/products/docker-desktop)
+2. Run the `.exe` installer and follow the on-screen prompts. Ensure WSL2 is enabled if prompted.
+3. Restart your computer.
+4. Launch Docker Desktop and wait for the engine to start.
 
-### Verify Docker Installation:
+### ✅ Verify Your Docker Installation
+Run these commands to ensure Docker is active:
 ```bash
 docker --version
 docker run hello-world
 ```
 
-## Installation Methods
+---
 
-### Method 1: Direct Internet Download (Recommended)
-**Best for:** Users with good internet connection
+## 🚀 Step 2: Choose Your Supanel Installation Method
 
-#### Step 1: Download Image
+### Method 1: Direct Internet Download (Highly Recommended)
+**Best for:** Cloud VPS, Dedicated Servers, and users with a fast internet connection.
+
+#### 1. Pull the Official Supanel Image
 ```bash
 docker pull ghcr.io/skilledu/supanel:latest
 ```
 
-#### Step 2: Run Container
-**For Linux/macOS:**
+#### 2. Run the Supanel Container
+Execute the command that corresponds to your operating system to deploy the **aaPanel container**:
+
+**For Linux & macOS Terminal:**
 ```bash
 docker run --privileged -d \
   -p 20:20 -p 21:21 -p 22:22 -p 25:25 \
@@ -101,7 +118,6 @@ docker run --privileged -d \
   --name=supanel_server \
   ghcr.io/skilledu/supanel:latest
 ```
-
 
 **For Windows PowerShell:**
 ```powershell
@@ -118,7 +134,6 @@ docker run --privileged -d `
   --name=supanel_server `
   ghcr.io/skilledu/supanel:latest
 ```
-
 
 **For Windows CMD:**
 ```cmd
@@ -136,17 +151,17 @@ docker run --privileged -d ^
   ghcr.io/skilledu/supanel:latest
 ```
 
-
-**One-line command (All OS):**
+**One-line command (Universal / All OS):**
 ```bash
 docker run --privileged -d -p 20:20 -p 21:21 -p 22:22 -p 25:25 -p 53:53 -p 53:53/udp -p 80:80 -p 443:443 -p 3306:3306 -p 5432:5432 -p 6379:6379 -p 27017:27017 -p 9200:9200 -p 9300:9300 -p 15672:15672 -p 5672:5672 -p 888:888 -p 2025:2025 -p 7800:7800 -p 8080:8080 -p 8443:8443 -p 9001:9001 -p 8888:8888 -p 3000:3000 -p 8000:8000 -p 39000-39009:39000-39009 --name=supanel_server ghcr.io/skilledu/supanel:latest
 ```
 
+---
 
-### Method 2: Download Tar File (Offline Installation)
-**Best for:** Users with slow internet or offline installation needs
+### Method 2: Download Tar File (Offline Air-gapped Installation)
+**Best for:** Local enterprise networks, offline setups, or extremely slow internet connections.
 
-#### Step 1: Download Tar File
+#### 1. Download the Supanel Tar File
 ```bash
 # Using wget
 wget https://github.com/skilledu/supanel/releases/download/supanel/supanel.tar
@@ -155,19 +170,19 @@ wget https://github.com/skilledu/supanel/releases/download/supanel/supanel.tar
 curl -L -o supanel.tar https://github.com/skilledu/supanel/releases/download/supanel/supanel.tar
 ```
 
-
-#### Step 2: Load Image
+#### 2. Load the Docker Image
 ```bash
-# Load the tar file as Docker image
+# Extract the tar archive into Docker
 docker load -i supanel.tar
 
-# Verify the image is loaded
+# Verify the image was successfully loaded
 docker images | grep supanel
 ```
 
+#### 3. Run the Offline Supanel Container
+*Note: This command uses the local `supanel:latest` image tag rather than the cloud `ghcr.io` link.*
 
-#### Step 3: Run Container
-**For Linux/macOS:**
+**For Linux & macOS Terminal:**
 ```bash
 docker run --privileged -d \
   -p 20:20 -p 21:21 -p 22:22 -p 25:25 \
@@ -182,7 +197,6 @@ docker run --privileged -d \
   --name=supanel_server \
   supanel:latest
 ```
-
 
 **For Windows PowerShell:**
 ```powershell
@@ -200,72 +214,75 @@ docker run --privileged -d `
   supanel:latest
 ```
 
-
-**One-line command (All OS):**
+**One-line command (Universal / All OS):**
 ```bash
 docker run --privileged -d -p 20:20 -p 21:21 -p 22:22 -p 25:25 -p 53:53 -p 53:53/udp -p 80:80 -p 443:443 -p 3306:3306 -p 5432:5432 -p 6379:6379 -p 27017:27017 -p 9200:9200 -p 9300:9300 -p 15672:15672 -p 5672:5672 -p 888:888 -p 2025:2025 -p 7800:7800 -p 8080:8080 -p 8443:8443 -p 9001:9001 -p 8888:8888 -p 3000:3000 -p 8000:8000 -p 39000-39009:39000-39009 --name=supanel_server supanel:latest
 ```
 
+---
 
-## Verification
+## ✅ Step 3: Verification & Initializing the Panel
 
-After running the command, you can verify that the container is running:
-
+### 1. Verify the Container is Running
+After executing the run command, verify that the Docker container is active:
 ```bash
 docker ps
 ```
+You should see `supanel_server` listed in the output with an "Up" status.
 
-You should see the `supanel_server` container in the running state.
-
-## Accessing the Server
-
-The Supanel server will be accessible on various ports as configured in the Docker run command.
-
-### Web Interface Access
-- **Admin Panel**: http://localhost:2025/supanel
-
-### Default Credentials
-- **Username**: `skilledu`
-- **Password**: `skilledu`
-
-## Start aaPanel Service
-
-After the container is running, you need to start the aaPanel service inside the container:
-
+### 2. Start the Internal aaPanel Service
+Supanel requires the internal aaPanel services to be initialized before you can log in:
 ```bash
-# Access the container
+# Access the active container
 docker exec -it supanel_server bash
 
-# Start aaPanel service
+# Start the aaPanel background service
 sudo bt 3
 ```
 
+> **Important Architecture Note**: This container comes natively integrated with **[aaPanel](https://www.aapanel.com/)**, an enterprise-grade open-source hosting control panel managing over 3,000,000 servers worldwide since 2017.
 
-**Note**: This container includes [aaPanel](https://www.aapanel.com/) - a free and open-source hosting control panel that has been installed on more than 3,000,000+ servers since 2017.
+---
 
-## Container Management
+## 🌐 Accessing the Supanel Server UI
 
-### Stopping the Server
-To stop the server:
+Once initialized, the **Supanel control panel** will be accessible through your browser. 
+
+### Web Interface Access URL
+- **Admin Panel**: [http://localhost:2025/supanel](http://localhost:2025/supanel)  
+*(If installing on a remote VPS, replace `localhost` with your public server IP).*
+
+### Default Authentication Credentials
+- **Username**: `skilledu`
+- **Password**: `skilledu`
+
+---
+
+## ⚙️ Container Management Commands
+
+As a server administrator, you can easily manage the lifecycle of your **Supanel installation** using these standard Docker commands:
+
+### Stop the Server Safely
 ```bash
 docker stop supanel_server
 ```
 
-### Starting the Server Again
-To start the server again:
+### Restart / Start the Server
 ```bash
 docker start supanel_server
 ```
 
-### Removing the Server
-To completely remove the server:
+### Completely Remove the Server Instance
 ```bash
 docker stop supanel_server
 docker rm supanel_server
 ```
 
-## Notes
+### 📌 Critical Deployment Notes
+- The `--privileged` flag is strictly required for the container to access system-level functions (like managing internal firewall settings).
+- The server exposes multiple ports intentionally to support HTTP/HTTPS, MySQL, Redis, DNS, and FTP functionality natively.
+- The container name is fixed to `supanel_server` for easier management.
 
-- The `--privileged` flag is required for the server to function properly
-- The server exposes multiple ports for different services and protocols
-- The container is named `supanel_server` for easy management
+---
+
+*Need help? Visit [Skilled.u](https://skilledu.in/) for professional server management courses and expert tutorials.*
